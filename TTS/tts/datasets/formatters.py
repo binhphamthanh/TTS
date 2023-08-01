@@ -482,7 +482,7 @@ def mls(root_path, meta_files=None, ignored_speakers=None):
             )
     return items
 
-def biye(root_path):
+def biye(root_path, meta_file_train=None, ignored_speakers=None):
     items = []
     root_path = os.path.join(root_path, "")
     wav_files = glob(f"{root_path}/**/*.wav", recursive=True)

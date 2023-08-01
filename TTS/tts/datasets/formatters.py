@@ -482,6 +482,22 @@ def mls(root_path, meta_files=None, ignored_speakers=None):
             )
     return items
 
+def biye(root_path):
+    items = []
+    root_path = os.path.join(root_path, "")
+    wav_files = glob(f"{root_path}/**/*.wav", recursive=True)
+    for wav_file in wav_files:
+        speaker_name = "biye"
+        wav_file_parts = os.path.basename(wav_file).split('_')
+        if len(wav_file_parts) > 1:
+            speaker_name = wav_file_parts[0]
+        
+        txt_file = wav_file.replace("wav", "txt")
+        if os.path.exists(txt_file):
+            with open(txt_file, "r", encoding="utf-8") as file_text:
+                text = file_text.readlines()[0]
+            items.append({"text": text, "audio_file": wav_file, "speaker_name": speaker_name, "root_path": root_path})
+    return items
 
 # ======================================== VOX CELEB ===========================================
 def voxceleb2(root_path, meta_file=None, **kwargs):  # pylint: disable=unused-argument
